@@ -20,7 +20,7 @@ export class UserRepositoryImpl implements IUserRepository {
   async updateUser(data: UpdateUserDTO): Promise<UserEntity> {
     const { id, name, socket_id, avatar } = data;
 
-    const user = await User.findOneAndUpdate({ _id: id }, { $set: { name, avatar, socket_id } });
+    const user = await User.findOneAndUpdate({ _id: id }, { $set: { name, avatar, socket_id } }, { new: true });
 
     return UserEntityMapper.toDomain(user);
   }
