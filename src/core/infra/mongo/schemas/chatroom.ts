@@ -1,4 +1,5 @@
 import mongoose, { Schema, Document } from "mongoose";
+import { v4 as uuid } from "uuid";
 
 import { User } from "./user";
 
@@ -15,10 +16,11 @@ const ChatroomSchema = new Schema({
     }
   ],
   id_chatroom: {
-    type: String
+    type: String,
+    default: uuid()
   }
 });
 
-const classroom = mongoose.model<Chatroom>("Chatrooms", ChatroomSchema);
+const chatroom = mongoose.model<Chatroom>("Chatrooms", ChatroomSchema);
 
-export { classroom };
+export { chatroom };
