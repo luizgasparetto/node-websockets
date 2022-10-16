@@ -9,6 +9,7 @@ import { IUserRepository } from "../../domain/repositories/i-user-repository";
 import { UserEntityMapper } from "../mappers/user-entity-mapper";
 
 export class UserRepositoryImpl implements IUserRepository {
+
   async createUser(data: CreateUserDTO): Promise<UserEntity> {
     const { name, email, avatar, socket_id } = data;
 
@@ -23,6 +24,12 @@ export class UserRepositoryImpl implements IUserRepository {
     const user = await User.findOneAndUpdate({ _id: id }, { $set: { name, avatar, socket_id } }, { new: true });
 
     return UserEntityMapper.toDomain(user);
+  }
+
+  async getUsers(): Promise<UserEntity[]> {
+    const users = await User.find();
+
+    return users.map(e => UserEntityMapper.toDomain(e));
   }
 
   async findByEmail(email: string): AsyncMaybe<UserEntity> {

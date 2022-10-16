@@ -10,4 +10,5 @@ export interface IUserRepository {
   createUser(data: CreateUserDTO): Promise<UserEntity>;
   updateUser(data: UpdateUserDTO): Promise<UserEntity>;
   findByEmail(email: string): AsyncMaybe<UserEntity>;
+  getUsers(): Promise<UserEntity[]>;
 }
